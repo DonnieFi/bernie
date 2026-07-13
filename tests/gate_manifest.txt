@@ -1,0 +1,170 @@
+# 40B mapped unittest gate manifest
+# Drives scripts/run_mapped_suite.sh
+#
+# Add/remove test modules here. New tests should be appended to the appropriate
+# section instead of editing the shell script.
+#
+# Test tree (family-bot-1ov.1 done): single discover root bot/tests/
+#   BOT_TESTS  — all mapped modules (PYTHONPATH=bot; repo root)
+#   ROOT_TESTS — empty (legacy tests/ modules relocated into bot/tests/)
+# New production tests go under bot/tests/ + BOT_TESTS.
+#
+# Comments (#) and blank lines ignored.
+# Keep unittest only (no pytest).
+
+# === BOT_TESTS ===
+tests.test_agent_task_api
+tests.test_agent_utils
+tests.test_api_task_store
+tests.test_background_scheduler
+tests.test_blocked_ping
+tests.test_calendar_cache
+tests.test_chat_identity
+tests.test_chore_create_path
+tests.test_cognition_write
+tests.test_cognition_delivery
+tests.test_cognitive_tools
+tests.test_confidence_router
+tests.test_config_sync
+tests.test_config_validate
+tests.test_context_builder
+tests.test_context_legs
+tests.test_convert_task
+tests.test_db_write_stragglers
+tests.test_discord_typing
+tests.test_eval_policy
+tests.test_eval_service
+tests.test_eval_ungrounded
+tests.test_executive_review
+tests.test_executor_smol
+tests.test_frigate_hours
+tests.test_frigate_logic
+tests.test_frigate_mqtt_health
+tests.test_hardening
+tests.test_health_sleep
+tests.test_hitl_audit
+tests.test_hitl_discord
+tests.test_hitl_sampling
+tests.test_hitl_service
+tests.test_internal_discord_auth
+tests.test_internal_discord_resolve
+tests.test_history_interleave
+tests.test_http_session_role
+tests.test_cross_container_retry
+tests.test_home_tools
+tests.test_identity
+tests.test_identity_tools
+tests.test_tools_import_gate
+tests.test_judge_triple_fallback
+tests.test_legacy_schema_cleanup
+tests.test_schema_migrations
+tests.test_session_search
+tests.test_c79_list_pagination
+tests.test_c79_usage_and_read
+tests.test_llm_model_config
+tests.test_llm_routing
+tests.test_meals_tools
+tests.test_memory_tools
+tests.test_migrate_tasks_v32
+tests.test_model_selection
+tests.test_modes
+tests.test_modes_resolver
+tests.test_network_devices_store
+tests.test_network_watchman
+tests.test_nightly_digest_guardrails
+tests.test_notify_tools
+tests.test_ollama_resolver
+tests.test_oura_service
+tests.test_perf_followups
+tests.test_perf_instrumentation
+tests.test_phase13_db
+tests.test_phase1
+tests.test_phase26_03
+tests.test_phase26_04
+tests.test_phase26_05
+tests.test_phase3
+tests.test_presence_friends
+tests.test_proactive_nudge
+tests.test_research_bridge
+tests.test_research_deliver_executive
+tests.test_research_memory
+tests.test_school_calendar
+tests.test_search_tools
+tests.test_shadow_hooks
+tests.test_shadow
+tests.test_slash_registry
+tests.test_slash_tool_parity
+tests.test_snapshots
+tests.test_snapshot_profiles_config
+tests.test_task_access
+tests.test_task_detail_api
+tests.test_task_gating_contract
+tests.test_task_handlers
+tests.test_task_move_api
+tests.test_task_status
+tests.test_tasks_tools
+tests.test_task_store
+tests.test_task_types
+tests.test_task_utils
+tests.test_tool_surface
+tests.test_tool_tiers
+tests.test_transit_service
+tests.test_transit_tracking
+tests.test_typed_outputs
+tests.test_unified_task_service
+tests.test_unified_tasks
+# Wave 2 hard-cut regressions (non-DB beads)
+tests.test_api_package_8lx2
+tests.test_curator
+tests.test_external_ip
+tests.test_frigate_away_1bf4
+tests.test_get_usage_costs_5hy2
+tests.test_ha_live_map_1bf2
+tests.test_http_timeouts_1bf
+tests.test_memory_docs_5hy
+tests.test_unifi_snapshot_1bf3
+tests.test_wave2_nondb_tools
+# Wave 2 DB/perf closeout (8lx / ah5 / 1od / 1ov.4)
+tests.test_database_domains_8lx6
+tests.test_database_exports_8lx7
+tests.test_reminders_batch_ah53
+tests.test_presence_signal_align
+tests.test_slash_1od
+tests.test_tool_gateway_1ov4
+
+# Consolidated from tests/ tree (family-bot-1ov.1)
+tests.test_db_shadow_schema
+tests.test_email_ingest
+tests.test_email_ingest_summary
+tests.test_email_normalize
+tests.test_email_pending_claim
+tests.test_email_pending
+tests.test_email_policy
+tests.test_email_schema_migration
+tests.test_email_worker_block
+tests.test_eval_nightly
+tests.test_eval_triplet
+tests.test_executor_native
+tests.test_executor
+tests.test_rbac_parity
+tests.test_shadow_schema_compat
+tests.test_tool_gateway
+tests.test_tool_registry
+tests.test_tools_calendar
+tests.test_tools_full_load
+tests.test_tools_home
+
+# Additional modules relocated from tests/ (full tree)
+tests.test_context
+tests.test_email_ingest_cursor
+tests.test_email_rate_limit
+tests.test_email_unresolved
+tests.test_executor_selection
+tests.test_notification_orchestrator
+tests.test_notification_orchestrator_flush
+tests.test_phase27_review_fixes
+tests.test_shadow_write_blocking
+tests.test_flight_service
+
+# === ROOT_TESTS ===
+# (empty — 1ov.1: root tests/ modules moved to bot/tests/ + BOT_TESTS)

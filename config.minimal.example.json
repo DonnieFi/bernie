@@ -1,0 +1,95 @@
+{
+  "_comment": "Hour-1 onboarding — Discord + one LLM path + family placeholders. Copy to config.json and fill YOUR_* values. Full shape: config.example.json",
+
+  "timezone": "America/New_York",
+  "family_name": "The Example Family",
+
+  "guild_id": "YOUR_DISCORD_SERVER_ID",
+  "admin_discord_id": "YOUR_ADMIN_DISCORD_USER_ID",
+  "schedule_channel_id": "YOUR_MAIN_CHANNEL_ID",
+  "anvil_channel_id": "YOUR_ADMIN_CHANNEL_ID",
+  "security_channel_id": "YOUR_SECURITY_CHANNEL_ID",
+  "furnace_channel_id": "YOUR_MEALS_CHANNEL_ID",
+  "bellows_channel_id": "YOUR_CHATTER_CHANNEL_ID",
+  "slag_channel_id": "YOUR_AI_CHAT_CHANNEL_ID",
+
+  "active_model": "claude-sonnet-5",
+  "webui_model": "claude-sonnet-5",
+  "anthropic_models": ["claude-sonnet-5", "claude-haiku-4-5-20251001"],
+  "litellm_base_url": "",
+  "litellm_models": [],
+  "ollama_base_url": "",
+  "ollama_models": [],
+
+  "lat": 0.0,
+  "lon": 0.0,
+  "location": { "city": "YourCity", "province": "", "country": "" },
+
+  "home_assistant": {
+    "url": "http://homeassistant.local:8123",
+    "token": "YOUR_HA_LONG_LIVED_TOKEN"
+  },
+
+  "shared_calendars": [
+    { "id": "primary", "name": "Family", "include_in_summary": true }
+  ],
+  "school_calendars": [],
+  "show_school_in_daily_summary": true,
+
+  "family_members": {
+    "parent_one": {
+      "canonical_id": "parent_one",
+      "first_name": "Alex",
+      "aliases": ["alex", "dad"],
+      "discord_id": "YOUR_DISCORD_USER_ID",
+      "email": "alex@example.com",
+      "role": "admin",
+      "calendars": ["primary"],
+      "device_macs": [],
+      "ha_entity": "person.alex"
+    },
+    "parent_two": {
+      "canonical_id": "parent_two",
+      "first_name": "Morgan",
+      "aliases": ["morgan", "mom"],
+      "discord_id": "YOUR_DISCORD_USER_ID",
+      "email": "morgan@example.com",
+      "role": "parents",
+      "calendars": ["primary"],
+      "device_macs": [],
+      "ha_entity": "person.morgan"
+    }
+  },
+
+  "discord_roles": {
+    "admin": "Admin",
+    "parents": "Parents",
+    "kids": "Kids"
+  },
+
+  "executor": {
+    "chat": "native",
+    "max_steps": 5,
+    "max_tokens": 4096,
+    "chat_routing": "intent"
+  },
+
+  "context": {
+    "calendar_cache_ttl_s": 1800,
+    "weather_cache_ttl_s": 1800,
+    "snapshot_enabled": false,
+    "intent_router": { "enabled": false },
+    "prefetch": { "calendar": "intent", "weather": "intent", "ha": "always" }
+  },
+
+  "snapshot_profiles": {
+    "_comment": "xcq.6 — empty for OSS; fill vehicle/sleep HA entity maps for your home",
+    "vehicles": {},
+    "sleep": {}
+  },
+
+  "summary_hour": 7,
+  "summary_minute": 0,
+  "poll_interval_minutes": 5,
+  "default_reminder_minutes": 30
+}

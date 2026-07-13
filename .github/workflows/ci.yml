@@ -1,0 +1,70 @@
+# xcq.7 — free-tier CI for the public bernie tree
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  unittest-subset:
+    name: install + unittest subset
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: bot/requirements.lock
+
+      - name: Install bot deps
+        run: |
+          python -m pip install --upgrade pip
+          # lockfile if present; else requirements.txt
+          if [ -f bot/requirements.lock ]; then
+            pip install -r bot/requirements.lock
+          else
+            pip install -r bot/requirements.txt
+          fi
+
+      - name: Unit test subset (no Discord/Docker secrets)
+        env:
+          BERNIE_TESTING: "1"
+          ROLE: monolith
+          PYTHONPATH: bot
+        run: |
+          # Pure / low-dep modules safe on GHA free tier without live services
+          python -m unittest \
+            tests.test_eval_policy \
+            tests.test_task_status \
+            tests.test_task_types \
+            tests.test_c79_list_pagination \
+            -v
+
+  pip-audit:
+    name: pip-audit lockfile
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pip-audit
+        run: python -m pip install --upgrade pip pip-audit
+
+      - name: Audit requirements.lock
+        # warn-only on free tier until policy hardens; exit 0 with report
+        run: |
+          if [ -f bot/requirements.lock ]; then
+            pip-audit -r bot/requirements.lock --progress-spinner off || true
+          else
+            pip-audit -r bot/requirements.txt --progress-spinner off || true
+          fi

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bernie · Home Agent</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/panels.css?v=79">
+  <link rel="stylesheet" href="static/css/v3.css?v=79">
+  <link rel="stylesheet" href="static/css/v3_cameras.css?v=79">
+  <link rel="stylesheet" href="static/css/v3_tasks.css?v=79">
+  <link rel="stylesheet" href="static/vendor/leaflet/leaflet.css?v=79">
+  <script src="static/vendor/leaflet/leaflet.js?v=79"></script>
+</head>
+<body data-theme="dark">
+  <div id="app" class="app">
+    <!-- Rendered via JS -->
+  </div>
+
+  <div id="login-overlay">
+    <div class="brand-mark is-large"></div>
+    <div style="text-align: center;">
+      <div class="brand-name" style="font-size: 2rem;">bernie</div>
+      <div class="brand-sub">Command Center</div>
+    </div>
+    
+    <div id="login-avatar-grid" style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; max-width: 300px; margin: 20px auto;"></div>
+    
+    <form id="login-form" style="display: none; align-items: center; flex-direction: column;">
+      <div id="login-selected-user" style="font-weight: 600; margin-bottom: 12px; color: var(--ink-1);"></div>
+      <input type="password" id="login-token" placeholder="Password / PIN" required style="text-align: center; letter-spacing: .1em; font-size: 20px; width: 100%;" />
+      <button type="submit" id="login-submit" style="margin-top: 12px; width: 100%;">Unlock</button>
+      <button type="button" id="login-back" class="btn" style="margin-top: 8px; width: 100%; background: transparent; color: var(--ink-2); border: none;">Back</button>
+      <div id="login-err"></div>
+    </form>
+  </div>
+
+  <script src="static/js/data.js?v=79"></script>
+  <script src="static/js/app.v6.js?v=80"></script>
+  <script src="static/js/v3_activity.js?v=79"></script>
+  <script src="static/js/v3_network.js?v=79"></script>
+  <script src="static/js/v3_settings.js?v=79"></script>
+  <script src="static/js/v3_logs.js?v=79"></script>
+  <script src="static/js/v3_config.js?v=79"></script>
+  <script src="static/js/v3_family.js?v=79"></script>
+  <script src="static/js/v3_tasks.js?v=79"></script>
+  <script src="static/js/v3_home.js?v=79"></script>
+  <script src="static/js/v3_today.js?v=79"></script>
+  <script src="static/js/v3_cameras.js?v=79"></script>
+  <script src="static/js/v3_admin.js?v=79"></script>
+</body>
+</html>

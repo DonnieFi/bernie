@@ -1,0 +1,28 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Config is bind-mounted at runtime from the root
+config.json
+
+# Test and debug scripts
+test_*.py
+inspect_tomorrow*.py
+api_tester.py
+
+# Test images
+*.jpg
+*.png
+
+# Empty placeholder dirs (content comes from compose mounts)
+web/
+docs/
+
+# Test suite
+tests/

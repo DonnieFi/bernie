@@ -1,0 +1,22 @@
+discord.py==2.7.*
+anthropic>=0.40.0
+pydantic-ai-slim[anthropic,openai]>=2.2.0,<3.0
+httpx>=0.27
+google-api-python-client>=2.170.0
+google-auth-httplib2>=0.2.0
+google-auth-oauthlib>=1.2.0
+aiohttp>=3.9,<4.0
+fastapi>=0.115.0,<0.140
+uvicorn>=0.34.0,<0.51
+websockets>=14.0,<15.0
+python-multipart>=0.0.9
+croniter>=2.0.7
+aiomqtt>=2.0.0
+# docker>=7.0.0 (using aiohttp instead)
+jsonschema>=4.0.0
+smolagents==1.26.*
+gtfs-realtime-bindings>=1.0.0
+protobuf>=5.0,<8
+pydantic>=2.0,<3
+# Needed by smolagents OpenAIModel (used for direct-Ollama route via /v1)
+openai>=1.0.0

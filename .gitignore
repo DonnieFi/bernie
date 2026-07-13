@@ -1,0 +1,66 @@
+.env
+.env.*
+!.env.example
+config.json
+credentials/*.json
+data/
+__pycache__/
+*.pyc
+*.zip
+.venv/
+.venv*/
+.test-venv/
+patch_*.py
+.nfs*
+.aider*
+node_modules/
+.Trash-1000/
+*.jpg
+*.sqlite
+bot.log
+devices.json
+trackers.json
+bot/config.json
+bot/config.json.*
+
+# Local scratch / backups — never commit (config backups carry live secrets)
+*.db
+config.json.*
+scratch/
+tmp-sync/
+
+# Local IDE / agent artifacts — never commit
+.antigravitycli/
+.claude/
+.claude/worktrees/
+.codex/
+.cursor/
+.agents/
+.superpowers/
+bot/caddy/
+
+# Agent harness instructions (local / private monorepo only — not for public tree)
+AGENTS.md
+CLAUDE.md
+
+# Beads / Dolt (local issue DB + backups — not public source of truth)
+.beads/
+.beads-backup/
+.beads-issues-backup-*.jsonl
+.dolt/
+.beads-credential-key
+
+# Planning / agent scratch (export script also excludes these)
+.planning/
+*.patch
+bead-loop-prompt.md
+plan40b_inspect.md
+last_5_commits.patch
+run_test.py
+
+# Operator one-offs (not public tree)
+ops/
+tmp-sync/
+
+# MkDocs build output
+site/

@@ -1,0 +1,148 @@
+/* ==========================================================================
+   Bernie 3.0 — Design Tokens (legacy reference)
+   Production dashboard uses web/static/css/v3.css (:root). This file is kept
+   for mockups / activity handoff docs only — not linked from index.html.
+   ========================================================================== */
+
+:root {
+  /* ---- Base surfaces (warm charcoal, not pure black) ---- */
+  --bg:            oklch(0.16 0.006 60);      /* app background */
+  --bg-elev-1:     oklch(0.20 0.008 60);      /* card background */
+  --bg-elev-2:     oklch(0.24 0.009 60);      /* raised card / tile */
+  --bg-elev-3:     oklch(0.28 0.010 60);      /* hover / active tile */
+  --bg-inset:      oklch(0.13 0.006 60);      /* inset wells, timeline rail */
+
+  /* ---- Borders & dividers ---- */
+  --border:        oklch(0.30 0.008 60);
+  --border-soft:   oklch(0.24 0.007 60);
+  --border-strong: oklch(0.40 0.009 60);
+
+  /* ---- Text ---- */
+  --fg:            oklch(0.96 0.008 85);      /* primary text, slightly warm */
+  --fg-muted:      oklch(0.74 0.009 75);      /* secondary text */
+  --fg-dim:        oklch(0.56 0.009 70);      /* tertiary / meta */
+  --fg-faint:      oklch(0.42 0.008 65);      /* disabled / subtle labels */
+
+  /* ---- Person accents (matched chroma 0.16, lightness 0.72) ---- */
+  --p-mom:      oklch(0.72 0.14 245);      /* blue */
+  --p-dad:      oklch(0.72 0.16 55);       /* orange */
+  --p-child1:       oklch(0.72 0.18 310);      /* violet */
+  --p-child2:       oklch(0.75 0.15 150);      /* green */
+
+  --p-mom-soft: oklch(0.72 0.14 245 / 0.14);
+  --p-dad-soft: oklch(0.72 0.16 55  / 0.14);
+  --p-child1-soft:  oklch(0.72 0.18 310 / 0.14);
+  --p-child2-soft:  oklch(0.75 0.15 150 / 0.14);
+
+  /* ---- System signals ---- */
+  --accent:        oklch(0.80 0.14 75);       /* warm amber — Bernie/system */
+  --accent-glow:   oklch(0.86 0.16 80);       /* light-on glow */
+  --ok:            oklch(0.78 0.14 150);      /* home / success */
+  --warn:          oklch(0.78 0.15 80);       /* caution */
+  --err:           oklch(0.70 0.17 25);       /* error */
+
+  /* ---- Typography ---- */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-serif: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --fs-xs: 11px;
+  --fs-sm: 12.5px;
+  --fs-md: 14px;
+  --fs-lg: 16px;
+  --fs-xl: 20px;
+  --fs-2xl: 28px;
+  --fs-3xl: 40px;
+  --fs-4xl: 56px;
+
+  /* ---- Spacing scale ---- */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-7: 32px;
+  --s-8: 40px;
+  --s-9: 56px;
+  --s-10: 72px;
+
+  /* ---- Radii ---- */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+  --r-2xl: 28px;
+  --r-full: 999px;
+
+  /* ---- Shadows ---- */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.35), 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.3);
+  --shadow-inset: inset 0 1px 0 rgba(255,255,255,0.03);
+
+  /* ---- Motion ---- */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 150ms;
+  --dur-med: 250ms;
+  --dur-slow: 450ms;
+  --dur-entrance: 800ms;
+
+  /* Stagger delays */
+  --delay-1: 100ms;
+  --delay-2: 180ms;
+  --delay-3: 260ms;
+  --delay-4: 340ms;
+
+  /* ---- Activity / Usage dashboard tokens (warm cream, slate, terra, …) ----
+     Sourced from .planning/activity_mockup/design_handoff_activity_dashboard/README.md.
+     Scoped to the Activity (Usage) screen; other surfaces still use the
+     warm-charcoal palette above. */
+  --bg-2:          #ecdfc2;            /* deeper cream — hover bg */
+  --card-2:        #f5e9c9;            /* inset / tile background */
+  --line-strong:   rgba(70,55,30,0.22);
+
+  /* Anthropic / input family */
+  --slate:         #4d7a9a;
+  --slate-deep:    #345974;            /* claude-opus */
+  --slate-soft:    #93b1c5;            /* claude-haiku */
+
+  /* Output / accent family */
+  --terra:         #c97c3a;
+  --terra-deep:    #a05f25;
+  --terra-soft:    #e2b07a;
+
+  /* OpenRouter family */
+  --forest:        #3a6b4e;
+  --forest-soft:   #8aaf94;            /* or-deepseek */
+
+  /* Misc model colors */
+  --rust:          #a04830;            /* warning / over-budget */
+  --gold:          #b18a2c;            /* or-grok */
+  --plum:          #6b4a6e;            /* or-llama, KPI sparkline */
+}
+
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 color-mix(in oklab, var(--ok) 60%, transparent); }
+  70%  { box-shadow: 0 0 0 8px color-mix(in oklab, var(--ok) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--ok) 0%, transparent); }
+}
+
+@keyframes thinkingPulse {
+  0%   { box-shadow: 0 0 16px color-mix(in oklab, var(--accent) 30%, transparent); }
+  50%  { box-shadow: 0 0 40px color-mix(in oklab, var(--accent) 60%, transparent); }
+  100% { box-shadow: 0 0 16px color-mix(in oklab, var(--accent) 30%, transparent); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+}

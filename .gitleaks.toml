@@ -1,0 +1,21 @@
+# Public-export scan config (xcq.1). Test fixtures use obvious fake snowflakes.
+title = "bernie"
+
+[allowlist]
+description = "Test fakes and placeholders"
+paths = [
+  '''bot/tests/''',
+  '''^tests/''',
+  '''\.example''',
+  '''config\.example\.json''',
+  '''config\.minimal\.example\.json''',
+  '''\.env\.example''',
+]
+regexes = [
+  '''123456789012345678''',
+  '''111111111111111111''',
+  '''222222222222222222''',
+  '''999999999''',
+  '''YOUR_[A-Z0-9_]+''',
+  '''your_[a-z0-9_]+''',
+]

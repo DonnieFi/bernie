@@ -1,0 +1,104 @@
+# Beginner-friendly docs site. From repo root:
+#   pip install -r requirements-docs.txt
+#   mkdocs serve
+#
+# Site URL is a placeholder until GitHub Pages is enabled.
+site_name: Bernie
+site_description: Family coordination bot — Discord + Home Assistant
+site_url: https://donniefi.github.io/bernie/
+repo_url: https://github.com/DonnieFi/bernie
+repo_name: DonnieFi/bernie
+edit_uri: ""
+
+docs_dir: docs
+site_dir: site
+
+# Keep the site beginner-focused — private/archive trees stay on disk only.
+exclude_docs: |
+  archive/**
+  plans/**
+  specs/**
+  adr/**
+  tech-modernization-plan.md
+  testing-coordination.md
+  migration.md
+  oss/**
+  capabilities.md
+  capabilities_index.md
+  bernie.md
+  soul.md
+  context.md
+  dad.md
+  mom.md
+  child1.md
+  child2.md
+  USER_OVERRIDE.example.md
+  family/**
+
+theme:
+  name: material
+  palette:
+    - scheme: slate
+      primary: amber
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Light mode
+    - scheme: default
+      primary: amber
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Dark mode
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - content.code.copy
+  font:
+    text: Inter
+    code: JetBrains Mono
+
+plugins:
+  - search
+
+markdown_extensions:
+  - tables
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.details
+
+nav:
+  - Home: README.md
+  - Getting started:
+      - Quickstart: getting-started/quickstart.md
+      - Layer by layer: getting-started/layer-by-layer.md
+      - Discord setup: discord-onboarding.md
+      - Google OAuth: google-oauth.md
+  - Using Bernie:
+      - What you can ask: user-guide/what-you-can-ask.md
+      - Slash commands: user-guide/slash-commands.md
+      - Tools: user-guide/tools.md
+      - Channels & modes: user-guide/channels-and-modes.md
+      - Web dashboard: user-guide/web-dashboard.md
+      - Security & roles: user-guide/security-and-roles.md
+  - Reference:
+      - config.json: reference/config.md
+      - Environment: reference/environment.md
+      - Optional integrations: integrations/optional-services.md
+      - Deploy: deploy.md
+      - Family members: family.md
+      - DB schema: db-schema.md
+      - Branding: assets/ATTRIBUTION.md
+  - Architecture:
+      - Overview: architecture/README.md
+      - Decisions: architecture/DECISIONS.md
+      - Event / queue flow: architecture/EVENT_BUS_FLOW.md
+      - Request lifecycle: architecture/REQUEST_LIFECYCLE.md
+      - System map: architecture/BERNIE_SYSTEM_MAP.md
+  - Help:
+      - FAQ: help/faq.md
+      - Troubleshooting: help/troubleshooting.md

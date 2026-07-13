@@ -1,0 +1,386 @@
+{
+  "executor": {
+    "chat": "native",
+    "max_steps": 5,
+    "max_tokens": 4096,
+    "chat_routing": "intent",
+    "smol_models": [],
+    "smol_intent_patterns": [],
+    "native_intent_patterns": [],
+    "llm_step_timeout_s": 45,
+    "llm_queue_max_depth": 4,
+    "llm_queue_shed_shadow_first": true,
+    "shadow_defer_s": 2,
+    "shadow_harness_enabled": false
+  },
+
+  "context": {
+    "calendar_cache_ttl_s": 1800,
+    "weather_cache_ttl_s": 1800,
+    "snapshot_enabled": true,
+    "snapshot_refresh_min": 5,
+    "snapshot_refresh_timeout_s": 30,
+    "history_verbatim_tail": 4,
+    "intent_router": {
+      "enabled": true,
+      "sticky_turns": 2
+    },
+    "slag_funnel": {
+      "enabled": true
+    },
+    "prefetch": {
+      "calendar": "lazy",
+      "weather": "intent",
+      "ha": "always",
+      "dm_skip_calendar_default": true,
+      "furnace_skip_calendar": true
+    },
+    "ha_domains": [
+      "light",
+      "switch",
+      "media_player"
+    ]
+  },
+
+  "tool_gateway": {
+    "max_result_chars": 6000,
+    "per_tool_max_chars": {
+      "get_events_range": 3000,
+      "get_week_events": 3000,
+      "get_home_state": 4000
+    },
+    "calendar_summary_mode": true
+  },
+
+  "family_name": "The Smiths",
+  "timezone": "America/New_York",
+
+  "internal_discord_url": "http://bernie-discord:9000",
+
+  "guild_id": "YOUR_DISCORD_SERVER_ID",
+  "admin_discord_id": "YOUR_ADMIN_DISCORD_USER_ID",
+  "schedule_channel_id": "YOUR_SMITHY_CHANNEL_ID",
+
+  "email": {
+    "max_sends_per_hour": 10,
+    "max_sends_per_domain_per_hour": 3,
+    "approval_channel_id": "YOUR_SMITHY_CHANNEL_ID"
+  },
+  "study_guide_cc_email": "alex@example.com",
+  "research_cc_email": "alex@example.com",
+  "anvil_channel_id":    "YOUR_ANVIL_CHANNEL_ID",
+  "security_channel_id": "YOUR_SECURITY_CHANNEL_ID",
+  "furnace_channel_id":  "YOUR_FURNACE_CHANNEL_ID",
+  "bellows_channel_id":  "YOUR_BELLOWS_CHANNEL_ID",
+  "slag_channel_id":     "YOUR_SLAG_CHANNEL_ID",
+
+  "channel_tool_domains": {
+    "YOUR_SLAG_CHANNEL_ID": ["calendar", "memory", "weather", "notify", "search"]
+  },
+
+  "summary_hour": 7,
+  "summary_minute": 0,
+  "weekly_summary_hour": 8,
+  "weekly_summary_minute": 0,
+  "poll_interval_minutes": 5,
+  "default_reminder_minutes": 30,
+
+  "lat": 0.0,
+  "lon": 0.0,
+  "location": { "city": "YourCity", "province": "", "country": "" },
+
+  "active_model":   "claude-sonnet-5",
+  "webui_model":    "claude-sonnet-5",
+  "digest_model":   "claude-haiku-4-5-20251001",
+  "audit_model":    "claude-haiku-4-5-20251001",
+  "vision_model":   "claude-sonnet-5",
+  "openwebui_model": "llama3.2",
+  "openwebui_url":  "https://openwebui.example.local",
+  "openwebui_users": [],
+
+  "anthropic_models": [
+    "claude-opus-4-8",
+    "claude-sonnet-5",
+    "claude-haiku-4-5-20251001"
+  ],
+  "litellm_base_url":  "https://llm.example.local",
+  "openrouter_direct": true,
+  "litellm_admin_url": "https://llm.example.local:4000",
+  "litellm_models": [],
+  "caching_auto_or_models": ["or-deepseek-v4", "or-gpt-5-4-mini"],
+  "ollama_base_urls": [
+    "http://ollama.example.local:11434",
+    "http://ollama2.example.local:11434"
+  ],
+  "ollama_base_url": "http://ollama.example.local:11434",
+  "ollama_models": ["llama3.2"],
+  "llm_fallback": { "url": "", "model": "" },
+
+  "searxng_url": "http://searxng.example.local",
+
+  "home_assistant": {
+    "url":   "http://homeassistant.local:8123",
+    "token": "YOUR_HA_LONG_LIVED_TOKEN"
+  },
+
+  "shared_calendars": [
+    {
+      "id": "primary",
+      "name": "Family",
+      "include_in_summary": true
+    }
+  ],
+  "school_calendars": [
+    {
+      "id": "YOUR_SCHOOL_CALENDAR_ID@group.calendar.google.com",
+      "student": "CHILD_NAME"
+    }
+  ],
+  "_comment_show_school": "true = school classes in /summary and general calendar tools; set false for summer break (/school still works)",
+  "show_school_in_daily_summary": true,
+
+  "family_members": {
+    "parent_one": {
+      "canonical_id": "parent_one",
+      "first_name": "Alex",
+      "aliases": ["alex", "dad"],
+      "discord_id": "YOUR_DISCORD_USER_ID",
+      "email": "alex@example.com",
+      "role": "admin",
+      "calendars": ["primary"],
+      "device_macs": ["aa:bb:cc:dd:ee:ff"],
+      "device_ip": null,
+      "ha_entity": "person.alex",
+      "web_pin_hash": null
+    },
+    "parent_two": {
+      "canonical_id": "parent_two",
+      "first_name": "Morgan",
+      "aliases": ["morgan", "mom"],
+      "discord_id": "YOUR_DISCORD_USER_ID",
+      "email": "morgan@example.com",
+      "role": "parents",
+      "calendars": ["primary"],
+      "device_macs": ["ff:ee:dd:cc:bb:aa"],
+      "device_ip": null,
+      "ha_entity": "person.morgan",
+      "web_pin_hash": null
+    },
+    "child_one": {
+      "canonical_id": "child_one",
+      "first_name": "Jamie",
+      "aliases": ["jamie"],
+      "discord_id": "YOUR_DISCORD_USER_ID",
+      "email": null,
+      "role": "kids",
+      "calendars": [],
+      "device_macs": [],
+      "device_ip": null,
+      "ha_entity": "person.jamie",
+      "web_pin_hash": null
+    }
+  },
+
+  "discord_roles": {
+    "admin":   "Admin",
+    "parents": "Parents",
+    "kids":    "Kids"
+  },
+
+  "permission_groups": {
+    "admin":   ["admin", "bernie"],
+    "parents": ["admin", "bernie", "parents"],
+    "all":     ["admin", "bernie", "parents", "kids"]
+  },
+
+  "presence": {
+    "unifi_host": "https://unifi.example.local",
+    "unifi_ssl_verify": false,
+    "polling_interval_seconds": 60,
+    "device_trackers": {
+      "parent_one": "device_tracker.alex_phone",
+      "parent_two": "device_tracker.morgan_iphone"
+    }
+  },
+
+  "presence_notifications": {
+    "enabled": true,
+    "announce_channel_id": "YOUR_SMITHY_CHANNEL_ID"
+  },
+
+  "transit": {
+    "feed_url": "https://gtfs.example.ca/realtime/Vehicle/VehiclePositions.pb",
+    "cache_seconds": 15,
+    "zone_cache_days": 7,
+    "landmark_aliases": {
+      "home": "zone.home",
+      "school": "zone.school"
+    },
+    "tracking": {
+      "poll_seconds": 180,
+      "max_ticks": 10,
+      "session_ttl_seconds": 1800,
+      "error_retry_seconds": 30
+    }
+  },
+
+  "task_types": {
+    "chore": ["person:*"],
+    "research": ["agent:bernie", "agent:research-worker"],
+    "bernie": ["agent:bernie"]
+  },
+
+  "quiet_hours": {
+    "start_hour": 22,
+    "end_hour": 7,
+    "notification_queue_max_age_hours": 48,
+    "notification_flush_batch_threshold": 5
+  },
+
+  "network_watchman": {
+    "enabled": true,
+    "poll_interval_minutes": 15,
+    "daytime_alert_recipient": "admin_person_id",
+    "caddyfile_path": "/app/caddy-host/Caddyfile",
+    "caddy_check_interval_hours": 24,
+    "critical_hosts": {
+      "server_one": {
+        "ips": ["192.168.1.X"],
+        "match_names": ["server_one"],
+        "warn_wifi": true
+      },
+      "server_two": {
+        "ips": ["192.168.1.X", "192.168.1.X"],
+        "match_names": ["server_two"],
+        "warn_wifi": false,
+        "services": ["pihole"],
+        "ha_pihole_entity": "binary_sensor.pihole_status"
+      }
+    },
+    "probe_urls": {
+      "ha": "http://192.168.1.X:8123",
+      "pihole": "http://192.168.1.X:8053/admin"
+    }
+  },
+
+  "mqtt": {
+    "host": "192.168.1.X",
+    "port": 1883,
+    "username": "",
+    "password": ""
+  },
+
+  "frigate": {
+    "host": "http://192.168.1.X:5000",
+    "notification_channel_id": "YOUR_SECURITY_CHANNEL_ID",
+    "mode": "off",
+    "gate_entity": "person.parent_one",
+    "alert_labels": ["person"],
+    "night_hours": { "start": "22:00", "end": "06:00" },
+    "cameras_enabled": {},
+    "cameras": {}
+  },
+
+  "eval": {
+    "enabled": true,
+    "shadow_model": "or-your-local-model",
+    "shadow_daily_cap": 10,
+    "max_scored_per_night": 50,
+    "judge_concurrency": 3,
+    "eval_model": "claude-haiku-4-5-20251001",
+    "worker_model": "claude-haiku-4-5-20251001",
+    "capture": {
+      "enabled": true,
+      "defer_s": 2,
+      "shed_on_backpressure": true
+    },
+    "harness": {
+      "enabled": false,
+      "block_peak_hours": true,
+      "peak_start_hour": 15,
+      "peak_end_hour": 21
+    },
+    "nightly": {
+      "enabled": true,
+      "score_pairs": true,
+      "score_triplets": true,
+      "hitl": true,
+      "ungrounded_audit": true
+    }
+  },
+
+  "executive_review": {
+    "ignore_below": 0.35,
+    "suggest_above": 0.55,
+    "interrupt_confidence": 0.65
+  },
+  "proactive_nudge_tier": 2,
+
+  "cognitive_workers": {
+    "ollama_semaphore_size": 2,
+    "digest_concurrency": 3,
+    "study_calendars": [],
+    "study_keywords": "test|exam|quiz|rehearsal|recital|audition|midterm|finals?|final exam",
+    "research": {
+      "max_parallel": 2,
+      "max_queries_per_iteration": 5,
+      "default_model": "claude-haiku-4-5-20251001"
+    },
+    "study_guide": {
+      "dm_lead_time_hours": 2
+    },
+    "reflection": {
+      "model": "claude-haiku-4-5-20251001",
+      "max_tokens": 1024,
+      "confidence_threshold": 0.7
+    },
+    "consolidation": {
+      "model": "claude-haiku-4-5-20251001",
+      "max_tokens": 2048,
+      "confidence_threshold": 0.7
+    }
+  },
+
+  "watchman": {
+    "enabled": false,
+    "report_email": "you@example.com",
+    "containers_to_watch": []
+  },
+
+  "recollect_ics_url": "",
+  "sensor_exclusions": [],
+  "temperature_sensors": [],
+  "ha_switches": [],
+  "ha_media_players": [],
+  "ha_climate_sensors": [],
+  "ha_automations": [],
+  "ha_system_entities": [],
+  "anthropic_credits": 0,
+
+  "tool_surface": {
+    "inject_active_surface_summary": true,
+    "inject_deferral_rule": true,
+    "discovery_tools_always_on": ["search_tools", "list_slash_commands", "describe_modes"]
+  },
+
+  "cors_origins": [],
+  "db_backup_keep_days": 14,
+
+  "hot_memory": {
+    "context_md_max_chars": 12000,
+    "person_md_max_chars": 8000,
+    "user_override_path": "USER_OVERRIDE.md"
+  },
+
+  "prompt_layers": {
+    "static_max_tokens": 0,
+    "mode_max_tokens": 0,
+    "dynamic_max_tokens": 0,
+    "log_overhead": true
+  },
+
+  "snapshot_profiles": {
+    "vehicles": {},
+    "sleep": {}
+  }
+}

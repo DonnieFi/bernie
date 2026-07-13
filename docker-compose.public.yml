@@ -1,0 +1,141 @@
+# Public / generic three-container stack (xcq.4)
+# For local production hosts with LAN paths, use docker-compose.yml + docker-compose.bernie-host.yml.
+# Set TZ and optional LLM_EXTRA_HOST in the environment.
+#
+# Phase 40A — Container split (ADR-0003 single writer)
+# bernie-discord / bernie-api / bernie-cognition
+# bernie-cognition: RW ./data (sole SQLite writer)
+# bernie-discord / bernie-api: RO ./data (writes via cognition /internal/db/write)
+# Full monolith rollback: docker-compose.monolith.yml
+#
+# Secrets (incl. INTERNAL_POST_SECRET, used by the /internal/post hardened
+# endpoint) come from .env via env_file — never hardcode them here.
+
+services:
+  bernie-discord:
+    build: ./bot
+    container_name: bernie-discord
+    restart: unless-stopped
+    command: python -u main.py --role discord
+    environment:
+      - ROLE=discord
+      - LOG_PREFIX=[discord]
+      - TZ=${TZ:-America/Halifax}
+      - PYTHONUNBUFFERED=1
+      # INTERNAL_POST_SECRET is supplied via env_file (.env) — used by the
+      # hardened /internal/post endpoint (fails closed if unset).
+    env_file: .env
+    volumes:
+      # RO — discord routes mutations via bernie-cognition:9000/internal/db/write
+      - ./data:/data:ro
+      - ./bot:/app
+      - ./config.json:/app/config.json
+      - ./credentials:/credentials
+      - ./docs:/docs
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      # Caddy config for network_watchman is optional — see docker-compose.bernie-host.yml.
+      # Do NOT bind-mount /mnt/redhard1 here: if NFS is down at boot, Docker creates
+      # ghost directories at the mount source and bernie-discord fails to start.
+    networks:
+      - bernie-net
+    depends_on:
+      bernie-cognition:
+        condition: service_healthy
+    # Internal server on 9000 (bernie-net only) serves /internal/post for cognition
+    healthcheck:
+      # bot.is_ready() or on_ready file flag (see plan). Internal post server starts with the role.
+      test: ["CMD", "test", "-f", "/tmp/bernie_discord_ready"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  bernie-api:
+    build: ./bot
+    container_name: bernie-api
+    restart: unless-stopped
+    command: python -u main.py --role api
+    ports:
+      - "8000:8000"
+    environment:
+      - ROLE=api
+      - LOG_PREFIX=[api]
+      - TZ=${TZ:-America/Halifax}
+      - PYTHONUNBUFFERED=1
+    env_file: .env
+    volumes:
+      # RO — API routes mutations via bernie-cognition:9000/internal/db/write
+      - ./data:/data:ro
+      - ./bot:/app
+      - ./config.json:/app/config.json
+      - ./credentials:/credentials
+      - ./docs:/docs
+      - ./web:/web
+    networks:
+      - bernie-net
+    depends_on:
+      bernie-cognition:
+        condition: service_healthy
+    healthcheck:
+      # Use Python stdlib instead of curl (not installed in the slim image)
+      test: ["CMD", "python", "-c", "import urllib.request, urllib.error; urllib.request.urlopen('http://localhost:8000/api/health', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  bernie-cognition:
+    build: ./bot
+    container_name: bernie-cognition
+    restart: unless-stopped
+    command: python -u main.py --role cognition
+    environment:
+      - ROLE=cognition
+      - LOG_PREFIX=[cognition]
+      - TZ=${TZ:-America/Halifax}
+      - PYTHONUNBUFFERED=1
+      # INTERNAL_POST_SECRET is supplied via env_file (.env) — must match the
+      # value bernie-discord uses (cognition→discord /internal/post client).
+      # Cognition also serves /internal/db/write on port 9000 for discord/api writes.
+    env_file: .env
+    volumes:
+      # RW — sole SQLite writer (ADR-0003)
+      - ./data:/data
+      - ./bot:/app
+      - ./config.json:/app/config.json
+      - ./credentials:/credentials
+      - ./docs:/docs
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - bernie-net
+    healthcheck:
+      # Internal write RPC on :9000 must be up before discord/api start (40A soak)
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:9000/internal/db/health', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 25s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    deploy:
+      resources:
+        limits:
+          cpus: '1.5'
+          memory: 1.5G
+
+networks:
+  bernie-net:
+    driver: bridge
