@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+test_*.py
+
+# OAuth state belongs in named Docker volumes, never in the build context.
+.codex/
+.grok/
+auth.json
+token.json
+credentials.json
